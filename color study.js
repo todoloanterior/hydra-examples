@@ -20,3 +20,7 @@ s0.initScreen(1)
 solid().out(o1)
 
 render()
+
+// COLOR FEEDBACK
+
+src(o1).modulateHue(src(o1).scale(1.01),2).layer(osc(9,0.1,2).mask(shape(3,0.2,1e-6).rotate(1,0.2)),1).saturate(1.02).out(o1)
