@@ -1,17 +1,20 @@
-/////
-src(o1)
-.layer(src(o1))
-.scale(1.0001)
+/////  CURSOR WAR
+src(s0)
+//.layer(src(o1))
+.scale(1.01)
 .rotate(-.001)
-.mult(shape(200, 2, 2))
+//.mult(shape(200, 2, 2))
 .rotate(0.01)
-//.luma(0.1, 0.1)
-.modulateHue(src(o1), 0.99)
-//.blend(src(o1), 0.5)
-.out(o1)
+.contrast(2)
+.luma(0.1, 0.1)
+.modulate(voronoi(1, 0.1, 0.5)).modulateScale(osc(10, 0.2), 0.1)
+.modulateScale(osc(4, 0.1))
+.saturate(1.1)
+//.blend(src(o0), 0.5)
+.out(o0)
 
 
-//2 SCREEN
+//2 
 
 src(s0)
   .scale([1.01, 5.2])
@@ -23,17 +26,22 @@ src(s0)
   .modulate(s0, () => mouse.x * 0.0003)
   .out()
 
-  render(o3)
+//////////  COLOR FEEDBACK
 
-osc(10,11, 0.9)
-  .pixelate(10)
-  .rotate(0,0.9)
-  .kaleid(5)
-  .repeat(3)
-  .scale(1.01)
-.out(o1)
+src(s0)
+.thresh(0.5)
+//.scrollX(0, -0.1)
+.mult(osc(10, 0.2, 0)
+.color(1, 1, 0)
+.modulate(noise(3,1)).modulate(o0),1)
+//.modulateScale(osc(3, 0.2), -0.8)
+.add(src(o0).modulate(osc(3,0.3)).scrollY(0,-0.1),1)
+//.blend(src(o0).scrollY(-0.1),0.2)
+.diff(src(o0).scrollY(0,-0.1).diff(osc(3,0.5)),0.1)
+.out()
 
-src(o0).blend(src(o0)).out(o3)
+
+
 
 src(s0)
   .blend(src(s0), 0.99)
@@ -54,7 +62,6 @@ src(s0)
   .modulateScale(o0, 10)
   .out(o0)
 
-solid().out(o2)
 
 
 
@@ -75,7 +82,7 @@ solid().out(o2)
 
 // 4
 
-//STILL BLUE WATEEER
+
 osc(10, 0.001, () => 0.3 + a.fft[0]*2)
   .rotate(0, 0.2)
   .modulate(osc(3, 0.01), 0.4)
@@ -88,6 +95,7 @@ osc(10, 0.001, () => 0.3 + a.fft[0]*2)
   .saturate(1.1)
   .scale([1.2, 6])
   .out()
+
 
 // 5 
 
