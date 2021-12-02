@@ -14,17 +14,6 @@ src(s0)
 .out(o0)
 
 
-//2 
-
-src(s0)
-  .scale([1.01, 5.2])
-  .blend(osc(40,0.9,0.6), 0.05)
-  .modulate(o1, 0.001)
-  .saturate([1.1, 20, 1])
-  .modulateHue(o0)
-  .rotate(0, 0.05)
-  .modulate(s0, () => mouse.x * 0.0003)
-  .out()
 
 //////////  COLOR FEEDBACK
 
@@ -44,13 +33,13 @@ src(s0)
 
 
 src(s0)
-  .blend(src(s0), 0.99)
+  //.blend(src(s0), 0.99)
   .contrast(1.2)
   .modulate(o1, 0.01)
-  .scale([1.5,2.5])
+  .scale([1.5,1.5])
   //.blend(s0, 0.9)
-  .scrollX(2,1.3)
-  .scrollY(0.3,1.2)
+  .scrollX(0.2,0.3)
+  .scrollY(0.3,0.2)
   //.thresh(0.2, 1)
   //.color([0.1,1.5], [2,1.1,2])
   //.modulate(o1, () => mouse.x * 0.0003)
@@ -59,45 +48,12 @@ src(s0)
   //.rotate(0,0.2)
   .saturate([1,3])
   .blend(osc(5,0.09,0.09), 0.09)
-  .modulateScale(o0, 10)
+  .modulateScale(o0, 0.1)
   .out(o0)
 
 
 
-
-
-// 3
-  osc(5, 0.3, 0.8)
-    .rotate(0, 0.1)
-    .kaleid(5)
-    .repeat(2)
-    .rotate(0, -0.1)
-    .diff(src(o2))
-    //.mult(src(s0))
-    //.diff(src(s0))
-    .modulate(o0, () => mouse.y * 0.0003)
-    .modulate(o0, () => mouse.x * 0.0003)
-    .rotate(0, 0.2)
-    .out(o3)
-
-// 4
-
-
-osc(10, 0.001, () => 0.3 + a.fft[0]*2)
-  .rotate(0, 0.2)
-  .modulate(osc(3, 0.01), 0.4)
-  .rotate(0, 0.1)
-  .kaleid(5)
-  .modulateScale(osc(10,3,0.4), -1, 1.5)
-  //.blend(src(s0), 0.9)
-  //.scrollX(0, 0.4)
-  .modelateHue(o0)
-  .saturate(1.1)
-  .scale([1.2, 6])
-  .out()
-
-
-// 5 
+// 5   TEXTO LIQUIDO
 
 solid()
   .blend(s0, 0.92)
@@ -134,7 +90,7 @@ solid()
   //.scrollX(0, 0.1)
   .out()
 
-// 7
+// 7  GRADIENT
 
 src(s0)
 //.diff(gradient(1).repeat(10, 1))
