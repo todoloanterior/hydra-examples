@@ -1,0 +1,10 @@
+s0.initVideo('https://upload.wikimedia.org/wikipedia/commons/f/f3/%28%ED%94%BC%EC%B9%98%EC%BA%A0%29_%EB%A7%8C%EC%A0%90_%ED%99%9C%EC%95%BD_%EC%9D%B4%ED%83%9C%EC%84%9D_%ED%94%BC%EC%B9%98%EC%BA%A0_%EC%9D%B8%ED%84%B0%EB%B7%B0_-_%EC%84%9C%EC%9A%B8_3-0_%EC%84%B1%EB%82%A8_%282021.11.7%29.webm')
+
+src(s0)
+  .blend(o0, 0.9)
+  .modulate(o0, 0.001)
+  .saturate(1.01)
+  .modulate(osc(5,.1).modulate(noise(1),.22).diff(o0)
+  	.modulateScrollY(osc(2).modulate(osc().rotate(),.11))
+	.scale(.72).color(0.99,1.014,1))
+  .out()
