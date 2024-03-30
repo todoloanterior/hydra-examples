@@ -151,4 +151,24 @@ src(o0)
 .add(shape(3).scale(1,0.3,0.1).color(0.1,0.8,1).scrollX(-0.3,0.02)).rotate(0, -0.05).modulateHue(src(o0).scale(1,0.1),1).layer(osc(0.9,0.8,0.2).mask(shape([2,4,6,8,7,4,3],0.007,0.02))).rotate(0,0.01).modulate(voronoi(101)).modulate(osc(1,1)).mask(shape(4)).modulate(osc(1000))
 .out()
 
+
+//// COOL BANDS//////
+
+osc(110)
+  .color(0.6,0.2,0.9)
+  .rotate(() => Math.sin(time*0.8) * 0.12, 0.15)
+  .modulate(osc(12).rotate(0.35).add(o0, 0.15))
+  .add(osc(3).color(0.2,0.9,2.5))
+.out(o0)
+
+
+////// BINARY ECHO//////
+src(s0)
+.scrollX(0.01)H
+//.scale(1.99)
+.brightness([-0.03, -0.01])
+.scale(0.99)
+.saturate(1.3)
+.out()
+
   
