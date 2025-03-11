@@ -1,0 +1,78 @@
+await import("https://livecode.emptyfla.sh/hydra/all.js")
+
+let frame = 0;
+
+src(o0)
+	.sort(0, () => frame++, [0, -1, -1, 1].fast(0.5), [1, -1, 0, 1].fast(0.5))
+	.layer(osc(5, .3, 2)
+		.mask(shape(99, () => 0.4 + 0.2 * Math.sin(time))
+			.rotate(.1, .1)
+			.scrollX(.1, .1)
+			.scrollY(.1, .05)
+		))
+	.modulateHue(o0, 500)
+	.out()
+
+
+///////////////////////////////////////////////////////
+
+
+src(o0)
+	.layer(osc(60, 0)
+		.mask(shape(4, .1, .2)
+			.modulate(noise(5, 1)))
+		.scrollX(()=>Math.sin(time*0.5)*0.5, 0)
+        .scrollY(()=>Math.cos(time*0.5)*0.5, 0)
+		.mult(solid(0, 0, 0, 0), () => Math.floor(time*2) % 5 == 1 ? 0 : 1))
+	.scrollX(.0001, [.000001, -.000001])
+	.rotate([.01, .001].fast(0.5), .000001)
+	.modulateScale(noise([4, 3, 2], 0), 0.01)
+	.scale([1, .995, 1])
+	.modulate(o0, 0.001)
+	.out()
+
+
+ //////////////CRY ME A RIVER//////////////////
+
+
+ src(o0)
+	.blend(osc(18, .1, 1)
+		.modulate(noise(1))
+		.rotate(.1, .1), [0.009, 0.05].fast(0.25).smooth())
+	.modulateHue(o0, 40)
+	.scale(1.001)
+	.out()
+
+ /////////////////HOW STARS ARE BORN///////////////
+
+ updateTextureParams(o0, {wrap: ["mirror", "mirror"]})
+src2(o0)
+	.blend(osc(15, 0.1, 1), 0.1)
+	.scale(0.9, 16/9)
+  .rotate(()=>Math.abs(Math.sin(time*0.01))*Math.PI*2+1,0)
+	.out()
+
+
+
+///////////////
+osc(10, 1, 126)
+	.kaleid([5, 10, 4])
+	.modulate(noise())
+	.modulateScale(shape(100, 0.1, () => Math.abs(Math.sin(time))), 10.0)
+	.modulateRotate(o0)
+	.blend(src(o0))
+	.colorama(0.09)
+	.out()
+
+ ////////////// ACID CUBE ///////////////////
+ src(o0)
+	.layer(osc(1,1,128)
+         .mask(shape(4, 0.2, 0.1))
+         .blend(o0, 0.9)
+		)
+	.colorama([0.01, 0.008, 0.02])
+	.scale([0.99, 1.01].smooth())
+	.modulateScale(o0, [0.1, 0.01].fast(0.1))
+	.rotate(0.01)
+	.out()
+ 
